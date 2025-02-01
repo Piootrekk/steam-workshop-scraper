@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "dev": "tsx src/index.ts",
+    "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js"
   },
@@ -12,7 +12,14 @@
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.0.0",
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  },
   "dependencies": {
-    "tsx": "^4.19.2"
+    "@discordjs/rest": "^2.4.2",
+    "discord-api-types": "^0.37.118",
+    "dotenv": "^16.4.7"
   }
 }
