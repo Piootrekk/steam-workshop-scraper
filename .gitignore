@@ -57,5 +57,4 @@ dist-ssr
 *.sln
 *.sw?
 test*.json
-market-history*.json
-mongodb-data
+scraped-items.json

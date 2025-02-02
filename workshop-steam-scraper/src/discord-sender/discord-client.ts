@@ -3,7 +3,6 @@ import {
   APIChannel,
   APIEmbed,
   RESTPostAPIChannelMessageResult,
-  RESTPostAPICurrentUserCreateDMChannelResult,
   Routes,
 } from "discord-api-types/v10";
 
@@ -25,6 +24,7 @@ class DiscordClient {
     name: string,
     channels: APIChannel[]
   ): APIChannel => {
+    if (channels.length === 0) throw new Error("No server found");
     const channel = channels.find((channel) => channel.name === name);
     if (channel) return channel;
     return channels[0];
@@ -54,6 +54,15 @@ class DiscordClient {
       body: { embeds: [embed] },
     })) as RESTPostAPIChannelMessageResult;
   };
+
+  public sendNotification() {
+    const embed: APIEmbed = {
+      title: "Workshop rotated",
+      url: "Asd",
+      color: 6,
+      fields: [{}],
+    };
+  }
 }
 
 export default DiscordClient;

@@ -1,4 +1,5 @@
 import { config } from "dotenv";
+import { URL } from "url";
 
 config();
 
@@ -17,4 +18,10 @@ const getServerId = (): string => {
   return SERVER_ID;
 };
 
-export { getDiscordToken, getServerId };
+const getProxies = (): string => {
+  const { PROXIE } = process.env;
+  if (PROXIE === undefined || PROXIE === "") return "";
+  return PROXIE;
+};
+
+export { getDiscordToken, getServerId, getProxies };

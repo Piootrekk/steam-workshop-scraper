@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@discordjs/rest": "^2.4.2",
+    "cheerio": "^1.0.0",
     "discord-api-types": "^0.37.118",
     "dotenv": "^16.4.7"
   }
