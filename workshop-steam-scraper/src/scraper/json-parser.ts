@@ -2,20 +2,20 @@ import { existsSync, readFileSync, writeFileSync } from "fs";
 
 const filePath = "./scraped-items.json";
 
-const isFileExist = (): boolean => {
+const isExistLocalJSON = (): boolean => {
   if (!existsSync(filePath)) {
     return false;
   }
   return true;
 };
 
-const getDataFromFile = <T>(): T => {
+const getDataFromJSON = <T>(): T => {
   const data: T = JSON.parse(readFileSync(filePath, "utf-8"));
   return data;
 };
 
-const setData = <T>(item: T) => {
+const setDataToJSON = <T>(item: T): void => {
   writeFileSync(filePath, JSON.stringify(item, null, 2));
 };
 
-export { getDataFromFile, setData, isFileExist };
+export { isExistLocalJSON, getDataFromJSON, setDataToJSON };

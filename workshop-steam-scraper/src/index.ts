@@ -1,6 +1,6 @@
 import DiscordClient from "./discord-sender/discord-client";
-import { getDiscordToken, getServerId } from "./env";
-import { fetcherHtml, parseHtml } from "./scraper/scraper-workshop";
+import { getDiscordToken, getProxy, getServerId } from "./env";
+import ScraperWorkshop from "./scraper/scraper-workshop";
 
 const main = async () => {
   //   console.log("server started");
@@ -20,9 +20,12 @@ const main = async () => {
   //     },
   //   });
   //   console.log(feedback);
-  const rawHtml = await fetcherHtml();
-  const items = parseHtml(rawHtml);
-  console.log(JSON.stringify(items, null, 2));
+  const url =
+    "https://steamcommunity.com/workshop/browse/?appid=252490&browsesort=accepted&section=mtxitems&actualsort=accepted";
+  const proxy = getProxy();
+  const scrapper = new ScraperWorkshop(url, proxy);
+  await scrapper.dataSynchronizer();
+  process.exit(0);
 };
 
 main();

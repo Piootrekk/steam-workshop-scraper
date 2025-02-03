@@ -18,10 +18,10 @@ const getServerId = (): string => {
   return SERVER_ID;
 };
 
-const getProxies = (): string => {
-  const { PROXIE } = process.env;
-  if (PROXIE === undefined || PROXIE === "") return "";
-  return PROXIE;
+const getProxy = (): string => {
+  const { PROXY } = process.env;
+  if (PROXY === undefined || PROXY === "") return "";
+  return PROXY;
 };
 
-export { getDiscordToken, getServerId, getProxies };
+export { getDiscordToken, getServerId, getProxy };
