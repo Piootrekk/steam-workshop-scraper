@@ -14,6 +14,7 @@ enum FindState {
 class ScraperWorkshop {
   private url: URL;
   private proxy: string;
+  private items: TWorkshopItem[] = [];
   protected maxItemPerPage = 30;
 
   public constructor(url: string | URL, proxy: string) {
@@ -25,12 +26,18 @@ class ScraperWorkshop {
     return this.url;
   }
 
-  public set setUrl(url: URL | string) {
-    this.url = new URL(url);
+  private set setItems(items: TWorkshopItem[]) {
+    this.items = items;
   }
+
+  public get getItems() {
+    return this.items;
+  }
+
   private saveFileIfNotExist = async (): Promise<void> => {
     const rawHtml = await this.fetcherHtml(this.url);
     const parsedItems = parseHtml(rawHtml);
+    this.setItems = parsedItems;
     setDataToJSON(parsedItems);
   };
 
@@ -72,6 +79,7 @@ class ScraperWorkshop {
     }
     const trimmedData = parsedItems.slice(0, borderItem);
     console.log(trimmedData);
+    this.setItems = trimmedData;
     setDataToJSON(trimmedData);
   };
 }
