@@ -1,15 +1,25 @@
+import { initCronjob } from "./cronjob/cronjob";
 import DiscordClient from "./discord-sender/discord-client";
-import { getDiscordToken, getProxy, getServerId } from "./env";
+import {
+  getDiscordToken,
+  getProxy,
+  getServerId,
+  getTimeStamp,
+  getUrlToParse,
+} from "./env";
 import ScraperWorkshop from "./scraper/scraper-workshop";
 
-const main = async () => {
+const timeStampCronJob = getTimeStamp();
+let iteration = 0;
+
+const main = async (): Promise<void> => {
   console.log("server started");
 
-  const url =
-    "https://steamcommunity.com/workshop/browse/?appid=252490&browsesort=accepted&section=mtxitems&actualsort=accepted";
-
+  const urlToParse = getUrlToParse();
   const proxy = getProxy();
-  const scrapper = new ScraperWorkshop(url, proxy);
+  iteration++;
+  console.log("Cron iteration: ",iteration);
+  const scrapper = new ScraperWorkshop(urlToParse, proxy);
   await scrapper.dataSynchronizer();
   const items = scrapper.getItems;
   if (items.length === 0) {
@@ -20,8 +30,10 @@ const main = async () => {
   const serverId = getServerId();
   const discordClinet = new DiscordClient(dcToken, serverId);
   await discordClinet.setChannel("testy-na-produkcji");
-  await discordClinet.sendNotificationItemsRotation(items, url);
+  await discordClinet.sendNotificationItemsRotation(items, urlToParse);
+  console.log("Sent notification, ending process");
   process.exit(0);
 };
 
-main();
+const cronjob = initCronjob(main, timeStampCronJob);
+cronjob.start();

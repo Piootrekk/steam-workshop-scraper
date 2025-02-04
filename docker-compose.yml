@@ -1,0 +1,9 @@
+version: "3"
+services:
+  scraper:
+    build: ./workshop-steam-scraper
+    container_name: workshop-steam-scraper
+    ports:
+      - 3898:3898
+    env_file:
+      - .env

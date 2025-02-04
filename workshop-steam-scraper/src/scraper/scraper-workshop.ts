@@ -72,7 +72,6 @@ class ScraperWorkshop {
         (val) => val.title === jsonItems[0].title
       );
       if (borderItem === FindState.NOT_CHANGE) {
-        console.log("Nothing to change");
         return;
       }
       currentPage++;

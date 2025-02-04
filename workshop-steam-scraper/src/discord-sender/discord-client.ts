@@ -73,7 +73,7 @@ class DiscordClient {
     return fields;
   };
 
-  private sendMessageOnChannel = async (
+  public sendMessageOnChannel = async (
     embeds: APIEmbed[]
   ): Promise<RESTPostAPIChannelMessageResult> => {
     if (this.channel === null) throw new Error("Use setChannel before");

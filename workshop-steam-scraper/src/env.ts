@@ -1,5 +1,4 @@
 import { config } from "dotenv";
-import { URL } from "url";
 
 config();
 
@@ -24,4 +23,18 @@ const getProxy = (): string => {
   return PROXY;
 };
 
-export { getDiscordToken, getServerId, getProxy };
+const getUrlToParse = (): string => {
+  const { URL_TO_PARSE } = process.env;
+  if (URL_TO_PARSE === undefined || URL_TO_PARSE === "")
+    throw new Error("ENV URL_TO_PARSE NOT EXIST ");
+  return URL_TO_PARSE;
+};
+
+const getTimeStamp = (): string => {
+  const { TIME_STAMP } = process.env;
+  if (TIME_STAMP === undefined || TIME_STAMP === "")
+    throw new Error("ENV TIME_STAMP NOT EXIST ");
+  return TIME_STAMP;
+};
+
+export { getDiscordToken, getServerId, getProxy, getUrlToParse, getTimeStamp };

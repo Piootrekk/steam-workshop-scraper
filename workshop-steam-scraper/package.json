@@ -10,7 +10,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "packageManager": "pnpm@10.0.0",
   "devDependencies": {
     "@types/node": "^22.13.0",
@@ -20,6 +20,7 @@
   "dependencies": {
     "@discordjs/rest": "^2.4.2",
     "cheerio": "^1.0.0",
+    "cron": "^3.5.0",
     "discord-api-types": "^0.37.118",
     "dotenv": "^16.4.7"
   }
