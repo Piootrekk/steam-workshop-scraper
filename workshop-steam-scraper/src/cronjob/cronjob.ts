@@ -37,16 +37,30 @@ const getCronJobFromString = (timeStamp: string): TimeStampCronJob => {
 };
 
 const initCronjob = (
-  handleFunction: () => Promise<void>,
+  handleFunction: () => Promise<boolean>,
   timeStamp: string
 ) => {
+  let isJobRunning = false;
+  let jobSkippedCount = 0;
+
   const cronjob = CronJob.from({
     cronTime: getCronJobFromString(timeStamp),
     onTick: async () => {
+      if (isJobRunning) {
+        jobSkippedCount++;
+        console.log("JOB SKIPPED, COUNT: ", jobSkippedCount);
+      }
+      isJobRunning = true;
       try {
-        await handleFunction();
+        const shouldStop = await handleFunction();
+        if (shouldStop) {
+          console.log("CRON JOB STOPPED< DATA FOUND....");
+          cronjob.stop();
+        }
       } catch (err) {
         console.log("Cron job error:", err);
+      } finally {
+        isJobRunning = false;
       }
     },
   });

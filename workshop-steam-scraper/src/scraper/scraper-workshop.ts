@@ -38,6 +38,7 @@ class ScraperWorkshop {
     const rawHtml = await this.fetcherHtml(this.url);
     const parsedItems = parseHtml(rawHtml);
     this.setItems = parsedItems;
+    console.log("SAVED NEW DATA TO LOCAL JSON");
     setDataToJSON(parsedItems);
   };
 
@@ -72,6 +73,7 @@ class ScraperWorkshop {
         (val) => val.title === jsonItems[0].title
       );
       if (borderItem === FindState.NOT_CHANGE) {
+        console.log("NOTHING CHANGE...");
         return;
       }
       currentPage++;
@@ -79,6 +81,7 @@ class ScraperWorkshop {
     const trimmedData = parsedItems.slice(0, borderItem);
     console.log(trimmedData);
     this.setItems = trimmedData;
+    console.log("NEW ITEMS REPLACED...");
     setDataToJSON(trimmedData);
   };
 }

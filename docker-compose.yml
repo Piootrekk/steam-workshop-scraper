@@ -4,6 +4,6 @@ services:
     build: ./workshop-steam-scraper
     container_name: workshop-steam-scraper
     ports:
-      - 3898:3898
+      - 4000:4000
     env_file:
       - .env

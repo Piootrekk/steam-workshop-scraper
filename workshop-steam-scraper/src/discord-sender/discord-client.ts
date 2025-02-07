@@ -73,16 +73,20 @@ class DiscordClient {
     return fields;
   };
 
-  public sendMessageOnChannel = async (
+  private sendMessageOnChannel = async (
     embeds: APIEmbed[]
   ): Promise<RESTPostAPIChannelMessageResult> => {
     if (this.channel === null) throw new Error("Use setChannel before");
-    return (await this.rest.post(Routes.channelMessages(this.channel.id), {
-      body: {
-        content: `@everyone`,
-        embeds: embeds,
-      },
-    })) as RESTPostAPIChannelMessageResult;
+    const message = (await this.rest.post(
+      Routes.channelMessages(this.channel.id),
+      {
+        body: {
+          content: `@everyone`,
+          embeds: embeds,
+        },
+      }
+    )) as RESTPostAPIChannelMessageResult;
+    return message;
   };
 
   public sendNotificationItemsRotation = async (

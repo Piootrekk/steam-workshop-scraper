@@ -1,7 +1,10 @@
-FROM node:23-alpine
+FROM node:20-alpine
 
 WORKDIR /app
 
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN npm install -g corepack@latest
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
 COPY package.json pnpm-lock.yaml ./
@@ -12,6 +15,6 @@ COPY . .
 
 RUN pnpm build
 
-EXPOSE 3898
+EXPOSE 4000
 
 CMD ["pnpm", "start"]
