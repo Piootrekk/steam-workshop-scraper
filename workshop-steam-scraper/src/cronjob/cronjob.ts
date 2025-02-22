@@ -54,7 +54,7 @@ const initCronjob = (
       try {
         const shouldStop = await handleFunction();
         if (shouldStop) {
-          console.log("CRON JOB STOPPED< DATA FOUND....");
+          console.log("CRON JOB STOPPED, DATA FOUND....");
           cronjob.stop();
         }
       } catch (err) {

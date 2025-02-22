@@ -1,6 +1,6 @@
 import { existsSync, readFileSync, writeFileSync } from "fs";
 
-const filePath = "./scraped-items.json";
+const filePath = "./scraped-data/scraped-items.json";
 
 const isExistLocalJSON = (): boolean => {
   if (!existsSync(filePath)) {

@@ -15,7 +15,7 @@ const proxy = getProxy();
 let iteration = 0;
 console.log("server started");
 
-const main = async (): Promise<boolean> => {
+const cronExecute = async (): Promise<boolean> => {
   console.log("Cron iteration: ", iteration);
   iteration++;
   const scrapper = new ScraperWorkshop(urlToParse, proxy);
@@ -34,5 +34,9 @@ const main = async (): Promise<boolean> => {
   return true;
 };
 
-const cronjob = initCronjob(main, timeStampCronJob);
-cronjob.start();
+const main = async () => {
+  const cronjob = initCronjob(cronExecute, timeStampCronJob);
+  cronjob.start();
+};
+
+main();

@@ -19,5 +19,3 @@ build/
 .vscode
 *.swp
 *.swo
-test*.json
-market-history*.json
