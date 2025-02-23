@@ -30,7 +30,7 @@ const cronExecute = async (): Promise<boolean> => {
   const discordClinet = new DiscordClient(dcToken, serverId);
   await discordClinet.setChannel("testy-na-produkcji");
   await discordClinet.sendNotificationItemsRotation(items, urlToParse);
-  console.log("Sent notification, ending process");
+  console.log("Sending notification, ending process");
   return true;
 };
 

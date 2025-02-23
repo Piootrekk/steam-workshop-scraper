@@ -58,3 +58,4 @@ dist-ssr
 *.sw?
 test*.json
 scraped-items.json
+.backup.json

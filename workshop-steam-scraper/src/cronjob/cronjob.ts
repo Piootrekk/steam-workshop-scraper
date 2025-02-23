@@ -49,6 +49,7 @@ const initCronjob = (
       if (isJobRunning) {
         jobSkippedCount++;
         console.log("JOB SKIPPED, COUNT: ", jobSkippedCount);
+        return;
       }
       isJobRunning = true;
       try {

@@ -67,18 +67,23 @@ class ScraperWorkshop {
     let borderItem = FindState.NOT_EXIST;
     let currentPage = 1;
     let parsedItems: TWorkshopItem[] = [];
+    const trimmedData: TWorkshopItem[] = [];
     while (borderItem === FindState.NOT_EXIST) {
       parsedItems = await this.getItemsPerPage(currentPage);
       borderItem = parsedItems.findIndex(
         (val) => val.title === jsonItems[0].title
       );
-      if (borderItem === FindState.NOT_CHANGE) {
+      if (trimmedData.length === 0 && borderItem === FindState.NOT_CHANGE) {
         console.log("NOTHING CHANGE...");
         return;
       }
+      if (borderItem === FindState.NOT_EXIST) {
+        console.log("All page added");
+        trimmedData.push(...parsedItems);
+      }
       currentPage++;
     }
-    const trimmedData = parsedItems.slice(0, borderItem);
+    trimmedData.push(...parsedItems.slice(0, borderItem));
     console.log(trimmedData);
     this.setItems = trimmedData;
     console.log("NEW ITEMS REPLACED...");

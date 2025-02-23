@@ -60,9 +60,13 @@ class DiscordClient {
   private truncateLimits = (str: string, maxLength: number) =>
     str.length > maxLength ? str.substring(0, maxLength - 3) + "..." : str;
 
-  private truncateFields = (fields: APIEmbedField[]): APIEmbedField[] => {
-    if (fields.length > DcLimits.FIELDS_LIMIT) {
-      const trimmedFields = fields.slice(0, DcLimits.FIELDS_LIMIT - 1);
+  private truncateFields = (
+    fields: APIEmbedField[],
+    limit?: number
+  ): APIEmbedField[] => {
+    const maxLength = limit ? limit : DcLimits.FIELDS_LIMIT;
+    if (fields.length > maxLength) {
+      const trimmedFields = fields.slice(0, maxLength - 1);
       const newField: APIEmbedField = {
         name: "Others",
         value: "...",
@@ -107,7 +111,8 @@ class DiscordClient {
             name: item.title,
             value: `[${item.authorName}](${item.authorWorkshopUrl})`,
           };
-        })
+        }),
+        5
       ),
     };
     await this.sendMessageOnChannel([embed]);
